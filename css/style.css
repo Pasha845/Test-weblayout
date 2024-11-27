@@ -58,17 +58,6 @@
     url("../fonts/Merriweather-Bold.woff") format("woff");
 }
 
-@font-face {
-	font-family: "Montserrat";
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-  src: local(""),
-    url("../fonts/Montserrat-Medium.woff2") format("woff2"),
-    url("../fonts/Montserrat-Medium.woff") format("woff");
-}
-
-
 html {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -91,17 +80,21 @@ svg {
 	max-width: 100%;
 	height: auto;
 	vertical-align: bottom;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
 picture {
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
 :root {
   --white: #fff;
+  --yellow: #fbce51;
   --red: #F54932;
   --dark: #313131;
+  --black: #1f1f1f;
 }
 
 body {
@@ -132,8 +125,14 @@ ul, ol {
 }
 
 .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 
@@ -183,6 +182,7 @@ ul, ol {
 
 .header__logo {
   display: inline-block;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
@@ -245,6 +245,7 @@ ul, ol {
 .hero__btn,
 .hero__subbtn {
   display: inline-block;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   text-align: center;
   border-radius: 66px;
@@ -253,29 +254,31 @@ ul, ol {
   font-size: 16px;
   line-height: 130%;
   font-weight: 500;
+  -webkit-transition: color .3s, background-color .3s;
+  -o-transition: color .3s, background-color .3s;
   transition: color .3s, background-color .3s;
 }
 
 .hero__btn {
   margin-right: 16px;
   color: var(--white);
-  background: #1f1f1f;
+  background: var(--black);
 }
 
 .hero__subbtn {
-  border: 2px solid #1f1f1f;
+  border: 2px solid var(--black);
   padding: 13px 49px;
-  color: #1f1f1f;
+  color: var(--black);
 }
 
 .hero__btn:hover {
-  color: #1f1f1f;
-  background: #fbce51;
+  color: var(--black);
+  background: var(--yellow);
 }
 
 .hero__subbtn:hover {
   color: var(--white);
-  background: #1f1f1f;
+  background: var(--black);
 }
 
 .hero__btn:focus,
@@ -305,6 +308,9 @@ ul, ol {
   }
 
   .hero__flex {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 
@@ -337,23 +343,34 @@ ul, ol {
 }
 
 .runline__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
-  width: calc(100% * 2);
-  animation: ticker 15s linear infinite;
+  -webkit-animation: ticker 10s linear infinite;
+  animation: ticker 10s linear infinite;
 }
 
-.runline__list::after {
-  content: '';
-  display: inline-block;
-  width: 100%;
+@-webkit-keyframes ticker {
+  0% { 
+    -webkit-transform: translateX(0); 
+    transform: translateX(0); 
+  }
+  100% { 
+    -webkit-transform: translateX(-50%); 
+    transform: translateX(-50%); 
+  }
 }
 
 @keyframes ticker {
   0% { 
+    -webkit-transform: translateX(0); 
     transform: translateX(0); 
   }
   100% { 
+    -webkit-transform: translateX(-50%); 
     transform: translateX(-50%); 
   }
 }
@@ -378,6 +395,8 @@ ul, ol {
   width: 6px;
   height: 6px;
   background: var(--white);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
@@ -403,8 +422,11 @@ ul, ol {
 }
 
 .support__list {
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 64px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 
@@ -441,7 +463,10 @@ ul, ol {
 }
 
 .game__list {
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   gap: 16.5px;
   margin-left: 14px;
@@ -502,6 +527,7 @@ ul, ol {
 .game__table tr td span {
   margin-right: 12px;
   text-decoration: line-through;
+  -webkit-text-decoration-color: var(--red);
   text-decoration-color: var(--red);
 }
 
@@ -590,18 +616,35 @@ ul, ol {
 }
 
 .stage__list {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 20px 1fr 20px 1fr;
   grid-template-columns: repeat(3, 1fr);
+  -ms-grid-rows: auto;
   grid-template-rows: auto;
   gap: 20px;
   counter-reset: num;
+}
+
+.stage__list > *:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+}
+
+.stage__list > *:nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+}
+
+.stage__list > *:nth-child(3) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 5;
 }
 
 .stage__item {
   position: relative;
   padding: 20px;
   padding-left: 72px;
-  max-width: 394px;
   font-size: 20px;
   line-height: 120%;
   font-weight: 500;
@@ -628,6 +671,7 @@ ul, ol {
 }
 
 .stage__item:nth-child(3) {
+  -ms-grid-row-span: 2;
   grid-row: span 2;
 }
 
@@ -636,8 +680,10 @@ ul, ol {
 }
 
 .stage__item:last-child {
+  -ms-grid-column-span: 2;
   grid-column: span 2;
   position: relative;
+  padding-right: 290px;
 }
 
 .stage__image {
@@ -663,6 +709,22 @@ ul, ol {
     margin-left: 0;
     max-width: 335px;
     font-size: 18px;
+  }
+
+  .stage__list {
+    -ms-grid-columns: (1fr)[1];
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .stage__item:nth-child(3) {
+    -ms-grid-row-span: 1;
+    grid-row: span 1;
+  }
+
+  .stage__item:last-child {
+    -ms-grid-column-span: 1;
+    grid-column: span 1;
+    padding-right: 20px;
   }
 }
 
@@ -690,6 +752,8 @@ ul, ol {
   height: 44px;
   background: var(--dark);
   cursor: pointer;
+  -webkit-transition: background-color .3s;
+  -o-transition: background-color .3s;
   transition: background-color .3s;
 }
 
@@ -709,13 +773,20 @@ ul, ol {
   margin-right: 14px;
 }
 
-.participants__numbers {
+.participants__counter {
   margin-right: 14px;
+  font-size: 16px;
+  line-height: 120%;
 }
 
 .participants__slide {
   text-align: center;
   padding: 0 37px;
+  -webkit-transition: -webkit-transform 0.5s ease;
+  transition: -webkit-transform 0.5s ease;
+  -o-transition: transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
 }
 
 .participants__image {
@@ -738,6 +809,7 @@ ul, ol {
 
 .participants__link {
   display: inline-block;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border: 1px solid #3057a2;
   border-radius: 62px;
@@ -746,6 +818,8 @@ ul, ol {
   line-height: 120%;
   font-weight: 500;
   color: #3057a2;
+  -webkit-transition: color .3s, background-color .3s;
+  -o-transition: color .3s, background-color .3s;
   transition: color .3s, background-color .3s;
 }
 
