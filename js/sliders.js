@@ -1,39 +1,62 @@
-let currentSlide = 0; // Текущий слайд
-const slides = document.querySelectorAll('.participants__slide'); // Все слайды
-const counter = document.querySelector('.participants__counter'); // Элемент для отображения счётчика
-const slidesToShow = 3; // Количество слайдов, показываемых на экране
-const totalSlides = slides.length; // Общее количество слайдов
+let currentSlide = 0;
+const slides = document.querySelectorAll('.participants__slide');
+const counter = document.querySelector('.participants__counter');
+const prevButton = document.querySelector('.participants__prev');
+const nextButton = document.querySelector('.participants__next');
+let slidesToShow = 3;
+const totalSlides = slides.length;
 
-function updateCounter() {
-  counter.textContent = `${currentSlide + 3} / ${totalSlides}`;
-}
+const updateCounter = () => {
+  counter.innerHTML = `${currentSlide + Math.min(slidesToShow, totalSlides)} / <span>${totalSlides}</span>`;
+};
 
-function showSlides() {
+const updateButtonStatus = () => {
+  if (currentSlide === 0) {
+    prevButton.classList.add('participants__dis');
+  } else {
+    prevButton.classList.remove('participants__dis');
+  }
+
+  if (currentSlide >= totalSlides - slidesToShow) {
+    nextButton.classList.add('participants__dis');
+  } else {
+    nextButton.classList.remove('participants__dis');
+  }
+};
+
+const showSlides = () => {
   slides.forEach((slide, i) => {
-    if (i >= currentSlide && i < currentSlide + slidesToShow) {
-      slide.style.display = 'block'; // Показываем слайд
-    } else {
-      slide.style.display = 'none'; // Скрываем слайд
-    }
+    slide.style.display = (i >= currentSlide && i < currentSlide + slidesToShow) ? 'block' : 'none';
   });
   updateCounter();
-}
+  updateButtonStatus();
+};
 
-document.querySelector('.participants__prev').addEventListener('click', () => {
-  // Обработка нажатия кнопки "предыдущий"
+const updateSlidesToShow = () => {
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    slidesToShow = 1;
+  } else {
+    slidesToShow = 3;
+  };
+  currentSlide = 0;
+  showSlides();
+};
+
+prevButton.addEventListener('click', () => {
   if (currentSlide > 0) {
-    currentSlide--; // Уменьшаем номер текущего слайда
+    currentSlide--;
   }
-  showSlides(); // Обновляем отображение слайдов
+  showSlides();
 });
 
-document.querySelector('.participants__next').addEventListener('click', () => {
-  // Обработка нажатия кнопки "следующий"
+nextButton.addEventListener('click', () => {
   if (currentSlide < totalSlides - slidesToShow) {
-    currentSlide++; // Увеличиваем номер текущего слайда
+    currentSlide++;
   }
-  showSlides(); // Обновляем отображение слайдов
+  showSlides();
 });
 
-updateCounter(); // Инициализация счётчика
-showSlides(); // Изначально показываем слайды
+updateSlidesToShow();
+showSlides();
+
+window.addEventListener('resize', updateSlidesToShow);
