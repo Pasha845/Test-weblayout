@@ -666,6 +666,7 @@ ul, ol {
 .stage {
   padding-top: 95px;
   padding-bottom: 100px;
+  overflow: hidden;
 }
 
 .stage__title {
@@ -768,6 +769,17 @@ ul, ol {
   display: none;
 }
 
+@media (max-width: 1024px) {
+  .stage__list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .stage__item:last-child {
+    -ms-grid-column-span: 1;
+    grid-column: span 1;
+  }
+}
+
 @media (max-width: 576px) {
   .stage {
     padding-top: 60px;
@@ -796,6 +808,7 @@ ul, ol {
     display: flex;
     gap: 20px;
     counter-reset: num;
+    margin: 0 auto;
     margin-bottom: 48px;
     max-width: 335px;
     transition: transform 0.5s ease;

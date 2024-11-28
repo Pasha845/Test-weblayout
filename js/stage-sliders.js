@@ -21,24 +21,24 @@ function updateSlider() {
       updateSlider();
     });
     pagination.appendChild(dot);
-  }
+  };
 
   nextBtn.classList.toggle('stage__dis', currentIndex >= totalSlides - 1);
   prevBtn.classList.toggle('stage__dis', currentIndex <= 0);
-}
+};
 
 nextBtn.addEventListener('click', () => {
   if (currentIndex < stageSlides.length - 1) {
     currentIndex++;
     updateSlider();
-  }
+  };
 });
 
 prevBtn.addEventListener('click', () => {
   if (currentIndex > 0) {
     currentIndex--;
     updateSlider();
-  }
+  };
 });
 
 updateSlider();
