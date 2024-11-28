@@ -172,6 +172,56 @@
             </picture>
           </li>
         </ol>
+        <ul class="stage__slider none">
+          <li class="stage__slide">
+            <div class="stage__item">
+              <picture>
+                <source srcset="img/stage.webp" media="(min-width: 320px)">
+                <img loading="lazy" class="stage__image" srcset="img/stage.webp" alt="Stage image" src="#" width="400" height="221">
+              </picture>
+              <p>Строительство железнодорожной магистрали Москва-Васюки</p>
+            </div>
+            <div class="stage__item">
+              <p>Открытие фешенебельной гостиницы «Проходная пешка» и других небоскрёбов</p>
+            </div>
+          </li>
+          <li class="stage__slide">
+            <div class="stage__item">
+              <p>Поднятие сельского хозяйства в радиусе на тысячу километров: производство овощей, фруктов, икры, шоколадных конфет</p>
+            </div>
+          </li>
+          <li class="stage__slide">
+            <div class="stage__item">
+              <p>Строительство дворца для турнира</p>
+            </div>
+            <div class="stage__item">
+              <p>Размещение гаражей для гостевого автотранспорта</p>
+            </div>
+          </li>
+          <li class="stage__slide">
+            <div class="stage__item">
+              <p>Постройка сверхмощной радиостанции для передачи всему миру сенсационных результатов</p>
+            </div>
+          </li>
+          <li class="stage__slide">
+            <div class="stage__item">
+              <p>Создание аэропорта «Большие Васюки» с регулярным отправлением почтовых самолётов и дирижаблей во все концы света, включая Лос-Анжелос и Мельбурн</p>
+            </div>
+          </li>
+        </ul>
+        <div class="stage__div flex">
+          <button class="stage__prev slider-btn">
+            <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5382 18.4615L2.07666 9.99995L10.5382 1.53841" stroke="white" stroke-width="2" stroke-linecap="square" />
+            </svg>
+          </button>
+          <div class="stage__pagination"></div>
+          <button class="stage__next slider-btn">
+            <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.4618 1.53839L9.92334 9.99993L1.4618 18.4615" stroke="white" stroke-width="2" stroke-linecap="square" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -180,13 +230,13 @@
         <div class="participants__cube flex">
           <h2 class="participants__title title">Участники турнира</h2>
           <div class="participants__div flex">
-            <button class="participants__btn participants__prev">
+            <button class="participants__prev slider-btn">
               <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.5382 18.4615L2.07666 9.99995L10.5382 1.53841" stroke="white" stroke-width="2" stroke-linecap="square" />
               </svg>
             </button>
             <div class="participants__counter"></div>
-            <button class="participants__btn participants__next">
+            <button class="participants__next slider-btn">
               <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.4618 1.53839L9.92334 9.99993L1.4618 18.4615" stroke="white" stroke-width="2" stroke-linecap="square" />
               </svg>
@@ -282,6 +332,7 @@
     </div>
   </footer>
   <script defer src="js/scroll.js"></script>
-  <script defer src="js/sliders.js"></script>
+  <script defer src="js/stage-sliders.js"></script>
+  <script defer src="js/participants-sliders.js"></script>
 </body>
 </html>

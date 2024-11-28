@@ -3,25 +3,12 @@ const slides = document.querySelectorAll('.participants__slide');
 const counter = document.querySelector('.participants__counter');
 const prevButton = document.querySelector('.participants__prev');
 const nextButton = document.querySelector('.participants__next');
-let slidesToShow = 3;
+let slidesToShow = 0;
 const totalSlides = slides.length;
+let autoSlideInterval;
 
 const updateCounter = () => {
-  counter.innerHTML = `${currentSlide + Math.min(slidesToShow, totalSlides)} / <span>${totalSlides}</span>`;
-};
-
-const updateButtonStatus = () => {
-  if (currentSlide === 0) {
-    prevButton.classList.add('participants__dis');
-  } else {
-    prevButton.classList.remove('participants__dis');
-  }
-
-  if (currentSlide >= totalSlides - slidesToShow) {
-    nextButton.classList.add('participants__dis');
-  } else {
-    nextButton.classList.remove('participants__dis');
-  }
+  counter.innerHTML = `${Math.min(currentSlide + slidesToShow, totalSlides)} / <span>${totalSlides}</span>`;
 };
 
 const showSlides = () => {
@@ -29,34 +16,36 @@ const showSlides = () => {
     slide.style.display = (i >= currentSlide && i < currentSlide + slidesToShow) ? 'block' : 'none';
   });
   updateCounter();
-  updateButtonStatus();
 };
 
 const updateSlidesToShow = () => {
   if (window.matchMedia("(max-width: 768px)").matches) {
     slidesToShow = 1;
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlides();
+    }, 4000);
   } else {
     slidesToShow = 3;
-  };
-  currentSlide = 0;
+    clearInterval(autoSlideInterval);
+  }
+  
+  currentSlide = Math.min(currentSlide, totalSlides - slidesToShow); // Сбросить currentSlide при изменении размера
   showSlides();
 };
 
 prevButton.addEventListener('click', () => {
-  if (currentSlide > 0) {
-    currentSlide--;
-  }
+  currentSlide = (currentSlide - 1 + totalSlides) % (totalSlides - slidesToShow + 1);
   showSlides();
 });
 
 nextButton.addEventListener('click', () => {
-  if (currentSlide < totalSlides - slidesToShow) {
-    currentSlide++;
-  }
+  currentSlide = (currentSlide + 1) % (totalSlides - slidesToShow + 1);
   showSlides();
 });
 
+
 updateSlidesToShow();
 showSlides();
-
 window.addEventListener('resize', updateSlidesToShow);
